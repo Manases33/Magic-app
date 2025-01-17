@@ -53,9 +53,47 @@ class HomeScreen extends StatelessWidget {
                       'assets/images/fondo2.jpeg',
                       fit: BoxFit.fill,
                     ),
-                    Image.asset(
-                      'assets/images/fondo3.jpeg',
-                      fit: BoxFit.fill,
+                    Stack(
+                      children: [
+                        Image.asset(
+                          'assets/images/fondo3.jpeg',
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                        // Botón en la app de notas
+                        Positioned(
+                          top: 312 - 130, // Ajusta según tu imagen
+                          left: 93.5 - 60, // Ajusta según tu imagen
+                          child: GestureDetector(
+                            onTap: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("¡Botón de Notas pulsado!"),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 60,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.5), // Fondo visible
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "Notas",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
