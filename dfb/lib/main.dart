@@ -4,6 +4,60 @@ void main() {
   runApp(MyApp());
 }
 
+// Lista global de famosos
+final List<String> famosos = [
+  "1. Jim Carrey",
+  "2. Al Pacino",
+  "3. YoSoyPlex",
+  "4. Adam Sandler",
+  "5. Mario Casas",
+  "6. Cristiano Ronaldo",
+  "7. Mr Beast",
+  "8. Julia Roberts",
+  "9. Quentin Tarantino",
+  "10. Úrsula Corberó",
+  "11. Ester Expósito",
+  "12. Michael Jordan",
+  "13. Leo Messi",
+  "14. Britney Spears",
+  "15. Taylor Swift",
+  "16. Steve Jobs",
+  "17. Ilia Topuria",
+  "18. Kanye West",
+  "19. Tiger Woods",
+  "20. Myke Tyson",
+  "21. Beyoncé",
+  "22. Leonardo DiCaprio",
+  "23. Carlos Alcaraz",
+  "24. Enrique Iglesias",
+  "25. Primo de Rivera",
+  "26. Donald Trump",
+  "27. Vinicius Jr",
+  "28. Elon Musk",
+  "29. Justin Bieber",
+  "30. Dandy de Barcelona",
+  "31. Pep Guardiola",
+  "32. Zendaya",
+  "33. Vladimir Putin",
+  "34. Keanu Reeves",
+  "35. Avicii",
+  "36. Ariana Grande",
+  "37. Rafa Nadal",
+  "38. Ceciarmy",
+  "39. The Grefg",
+  "40. Pablo Iglesias",
+  "41. Lebron James",
+  "42. Stephen Hawking",
+  "43. Dani Martín",
+  "44. Brad Pitt",
+  "45. Alfred Hitchcock",
+  "46. IlloJuan",
+  "47. Pablo Motos",
+  "48. Tommy Shelby",
+  "49. Anuel AA",
+  "50. Andrés Iniesta"
+];
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -41,8 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
       if (inputNumber.length > 2) {
         inputNumber = inputNumber.substring(inputNumber.length - 2);
       }
+
+      // Actualizar la predicción en la lista de famosos
+      int index = int.parse(inputNumber) - 1; // Convertir inputNumber a índice (0-based)
+      if (index >= 0 && index < famosos.length) { // Verificar que está en rango
+        famosos[index] = "$inputNumber. Pepe"; // Cambiar a la predicción
+      }
     });
     print("Número actual: $inputNumber");
+    print("Lista actualizada: $famosos");
   }
 
   String? getTappedNumber(Offset position) {
@@ -210,59 +271,6 @@ class NotasMenuScreen extends StatelessWidget {
 }
 
 class ListaFamososScreen extends StatelessWidget {
-  final List<String> famosos = [
-    "1. Jim Carrey",
-    "2. Al Pacino",
-    "3. YoSoyPlex",
-    "4. Adam Sandler",
-    "5. Mario Casas",
-    "6. Cristiano Ronaldo",
-    "7. Mr Beast",
-    "8. Julia Roberts",
-    "9. Quentin Tarantino",
-    "10. Úrsula Corberó",
-    "11. Ester Expósito",
-    "12. Michael Jordan",
-    "13. Leo Messi",
-    "14. Britney Spears",
-    "15. Taylor Swift",
-    "16. Steve Jobs",
-    "17. Ilia Topuria",
-    "18. Kanye West",
-    "19. Tiger Woods",
-    "20. Myke Tyson",
-    "21. Beyoncé",
-    "22. Leonardo DiCaprio",
-    "23. Carlos Alcaraz",
-    "24. Enrique Iglesias",
-    "25. Primo de Rivera",
-    "26. Donald Trump",
-    "27. Vinicius Jr",
-    "28. Elon Musk",
-    "29. Justin Bieber",
-    "30. Dandy de Barcelona",
-    "31. Pep Guardiola",
-    "32. Zendaya",
-    "33. Vladimir Putin",
-    "34. Keanu Reeves",
-    "35. Avicii",
-    "36. Ariana Grande",
-    "37. Rafa Nadal",
-    "38. Ceciarmy",
-    "39. The Grefg",
-    "40. Pablo Iglesias",
-    "41. Lebron James",
-    "42. Stephen Hawking",
-    "43. Dani Martín",
-    "44. Brad Pitt",
-    "45. Alfred Hitchcock",
-    "46. IlloJuan",
-    "47. Pablo Motos",
-    "48. Tommy Shelby",
-    "49. Anuel AA",
-    "50. Andrés Iniesta"
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
