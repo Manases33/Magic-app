@@ -5,7 +5,7 @@ void main() {
 }
 
 // Lista global de famosos
-final List<String> famosos = [
+final List<String> famososOriginal = [
   "1. Jim Carrey",
   "2. Al Pacino",
   "3. YoSoyPlex",
@@ -58,6 +58,9 @@ final List<String> famosos = [
   "50. Andrés Iniesta"
 ];
 
+// Lista modificable (inicialmente una copia de `famososOriginal`)
+List<String> famosos = List.from(famososOriginal);
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -75,6 +78,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String inputNumber = ""; // Variable para almacenar el número seleccionado
+
   final List<Offset> buttonPositions = [
     Offset(300, 205), // Posición para 0
     Offset(110, 306), // Posición para 1
@@ -92,18 +96,31 @@ class _HomeScreenState extends State<HomeScreen> {
   void addNumber(String number) {
     setState(() {
       inputNumber += number;
+
+      // Limitar el número de caracteres a 2
       if (inputNumber.length > 2) {
         inputNumber = inputNumber.substring(inputNumber.length - 2);
       }
 
-      // Actualizar la predicción en la lista de famosos
-      int index = int.parse(inputNumber) - 1; // Convertir inputNumber a índice (0-based)
-      if (index >= 0 && index < famosos.length) { // Verificar que está en rango
-        famosos[index] = "$inputNumber. Pepe"; // Cambiar a la predicción
+      // Restablecer la lista de famosos antes de aplicar cambios
+      resetFamosos();
+
+      // Validar y actualizar solo cuando `inputNumber` tiene 1 o 2 dígitos válidos
+      if (inputNumber.isNotEmpty) {
+        int index = int.parse(inputNumber) - 1; // Convertir a índice basado en 0
+        if (index >= 0 && index < famosos.length) {
+          famosos[index] = "$inputNumber. Pepe"; // Cambiar a la predicción
+        }
       }
     });
+
     print("Número actual: $inputNumber");
     print("Lista actualizada: $famosos");
+  }
+
+  // Función para restablecer la lista de famosos a su estado original
+  void resetFamosos() {
+    famosos = List.from(famososOriginal);
   }
 
   String? getTappedNumber(Offset position) {
@@ -123,8 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -227,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
 
 class NotasMenuScreen extends StatelessWidget {
   @override
