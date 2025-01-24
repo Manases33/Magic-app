@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (inputNumber.isNotEmpty) {
         int index = int.parse(inputNumber) - 1; // Convertir a índice basado en 0
         if (index >= 0 && index < famosos.length) {
-          famosos[index] = "$inputNumber. Pepe"; // Cambiar a la predicción
+          famosos[index] = "$inputNumber. h"; // Cambiar a la predicción
         }
       }
     });
@@ -204,19 +204,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 width: 60,
                                 height: 60,
                                 decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.5),
+                                  color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: const Center(
-                                  child: Text(
-                                    "Notas",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
+                                
                               ),
                             ),
                           ),
@@ -257,15 +248,19 @@ class NotasMenuScreen extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          // Botón de regreso
+          // Botón de regreso invisible
           Positioned(
             top: 40,
             left: 20,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () {
+            child: GestureDetector(
+              onTap: () {
                 Navigator.pop(context);
               },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.transparent, // Invisible
+              ),
             ),
           ),
           // Botón para ver la lista de famosos
@@ -290,61 +285,85 @@ class ListaFamososScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          // Imagen superior fija
-          Image.asset(
-            'assets/images/top_notas.jpeg',
-            fit: BoxFit.fill,
-            width: double.infinity,
-            height: 100, // Ajustar altura según diseño
-          ),
-          // Lista con título al inicio
-          Expanded(
-            child: Container(
-              color: Colors.black,
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                itemCount: famosos.length + 1, // +1 para incluir el título
-                itemBuilder: (context, index) {
-                  if (index == 0) {
-                    // Título al inicio
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16.0),
-                      child: Text(
-                        'Lista de famosos',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24, // Tamaño ajustado para el título
-                          fontWeight: FontWeight.bold,
+          Column(
+            children: [
+              // Imagen superior fija
+              Image.asset(
+                'assets/images/top_notas.jpeg',
+                fit: BoxFit.fill,
+                width: double.infinity,
+                height: 100, // Ajustar altura según diseño
+              ),
+              // Lista con título al inicio
+              Expanded(
+                child: Container(
+                  color: Colors.black,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    itemCount: famosos.length + 1, // +1 para incluir el título
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        // Título al inicio
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16.0),
+                          child: Text(
+                            'Lista de famosos',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24, // Tamaño ajustado para el título
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      }
+                      // Elementos de la lista
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2.0, horizontal: 16.0), // Reducir espacio vertical
+                        child: Text(
+                          famosos[index - 1], // -1 para ajustar el índice
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16, // Tamaño de texto estándar
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  // Elementos de la lista
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 2.0, horizontal: 16.0), // Reducir espacio vertical
-                    child: Text(
-                      famosos[index - 1], // -1 para ajustar el índice
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16, // Tamaño de texto estándar
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
+              ),
+              // Imagen inferior fija
+              Positioned(
+                bottom: -40, // Pegada abajo del todo
+                left: 0,
+                right: 0,
+                child: Image.asset(
+                'assets/images/bottom_notas.jpeg',
+                fit: BoxFit.contain,
+                width: double.infinity,
+                height: 81.8, // Ajustar altura según diseño
+                )
+              ),
+            ],
+          ),
+          // Botón de regreso invisible
+          Positioned(
+            top: 40,
+            left: 20,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context); // Vuelve a NotasMenuScreen
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.transparent, // Invisible
               ),
             ),
-          ),
-          // Imagen inferior fija
-          Image.asset(
-            'assets/images/bottom_notas.jpeg',
-            fit: BoxFit.fill,
-            width: double.infinity,
-            height: 100, // Ajustar altura según diseño
           ),
         ],
       ),
