@@ -480,7 +480,7 @@ class NotasMenuScreen extends StatelessWidget {
                                     border: Border(
                                       bottom: BorderSide(
                                         color: CupertinoColors.darkBackgroundGray,
-                                        width: 0.005, // Línea de separación más fina
+                                        width: 0.5, // Línea de separación más fina
                                       ),
                                     ),
                                   ),
