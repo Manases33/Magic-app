@@ -463,75 +463,83 @@ class NotasMenuScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Expanded(
-                          child: CupertinoListSection.insetGrouped(
-                            backgroundColor: CupertinoColors.black,
-                            children: [
-                              PressableTileWrapper(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => ListaFamososScreen(),
+                          child: Transform.translate(
+                            // Se desplaza 20 píxeles hacia arriba (puedes ajustar este valor)
+                            offset: Offset(0, -20),
+                            child: CupertinoListSection.insetGrouped(
+                              backgroundColor: CupertinoColors.black,
+                              children: [
+                                PressableTileWrapper(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                        builder: (context) => ListaFamososScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: CupertinoColors.darkBackgroundGray,
+                                          width: 0.5, // Línea de separación más fina
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: CupertinoColors.darkBackgroundGray,
-                                        width: 0.005, // Línea de separación más fina
+                                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                                    child: CupertinoListTile(
+                                      backgroundColor: CupertinoColors.transparent,
+                                      title: Text(
+                                        'Lista de famosos',
+                                        style: TextStyle(color: CupertinoColors.white,
+                                        fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        '24/1/25   1. Jim Carrey',
+                                        style: TextStyle(color: CupertinoColors.inactiveGray,
+                                        fontSize: 15),
                                       ),
                                     ),
                                   ),
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                  child: CupertinoListTile(
-                                    backgroundColor: CupertinoColors.transparent,
-                                    title: Text(
-                                      'Lista de famosos',
-                                      style: TextStyle(color: CupertinoColors.white),
-                                    ),
-                                    subtitle: Text(
-                                      '24/1/25   1. Jim Carrey',
-                                      style: TextStyle(color: CupertinoColors.inactiveGray),
-                                    ),
-                                  ),
                                 ),
-                              ),
-                              PressableTileWrapper(
-                                onTap: () {
-                                  // Acción para la lista de ciudades
-                                  Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) => ListaCiudadesScreen(),
+                                PressableTileWrapper(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(
+                                        builder: (context) => ListaCiudadesScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: CupertinoColors.systemGrey,
+                                          width: 0.01, // Línea de separación más fina
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(
-                                        color: CupertinoColors.systemGrey,
-                                        width: 0.01, // Línea de separación más fina
+                                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                                    child: CupertinoListTile(
+                                      backgroundColor: CupertinoColors.transparent,
+                                      title: Text(
+                                        'Lista de ciudades',
+                                        style: TextStyle(color: CupertinoColors.white,
+                                        fontWeight: FontWeight.bold,),
+                                      ),
+                                      subtitle: Text(
+                                        '24/1/25   1. Bilbao',
+                                        style: TextStyle(color: CupertinoColors.inactiveGray,
+                                        fontSize: 15),
                                       ),
                                     ),
                                   ),
-                                  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                                  child: CupertinoListTile(
-                                    backgroundColor: CupertinoColors.transparent,
-                                    title: Text(
-                                      'Lista de ciudades',
-                                      style: TextStyle(color: CupertinoColors.white),
-                                    ),
-                                    subtitle: Text(
-                                      '24/1/25   1. Bilbao',
-                                      style: TextStyle(color: CupertinoColors.inactiveGray),
-                                    ),
-                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -568,12 +576,15 @@ class NotasMenuScreen extends StatelessWidget {
     );
   }
 }
+
+
 class ListaFamososScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Contenido principal en una columna
           Column(
             children: [
               // Imagen superior fija
@@ -600,7 +611,7 @@ class ListaFamososScreen extends StatelessWidget {
                             'Lista de famosos',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 24, // Tamaño ajustado para el título
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -609,12 +620,12 @@ class ListaFamososScreen extends StatelessWidget {
                       // Elementos de la lista
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            vertical: 2.0, horizontal: 16.0), // Reducir espacio vertical
+                            vertical: 2.0, horizontal: 16.0),
                         child: Text(
                           famosos[index - 1], // -1 para ajustar el índice
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16, // Tamaño de texto estándar
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -623,19 +634,22 @@ class ListaFamososScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Imagen inferior fija
-              Positioned(
-                bottom: -40, // Pegada abajo del todo
-                left: 0,
-                right: 0,
-                child: Image.asset(
-                'assets/images/bottom_notas.jpeg',
-                fit: BoxFit.contain,
-                width: double.infinity,
-                height: 81.8, // Ajustar altura según diseño
-                )
-              ),
+              // Puedes agregar aquí un espacio o un container para reservar el espacio de la imagen inferior,
+              // si no deseas que esté superpuesta.
+              SizedBox(height: 81.8), // Altura de la imagen inferior
             ],
+          ),
+          // Imagen inferior fija posicionada
+          Positioned(
+            bottom: 0, // Ajusta este valor según necesites
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/images/bottom_notas.jpeg',
+              fit: BoxFit.contain,
+              width: double.infinity,
+              height: 81.8, // Ajustar altura según diseño
+            ),
           ),
           // Botón de regreso invisible
           Positioned(
@@ -658,12 +672,14 @@ class ListaFamososScreen extends StatelessWidget {
   }
 }
 
+
 class ListaCiudadesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Contenido principal en una columna
           Column(
             children: [
               // Imagen superior fija
@@ -701,7 +717,7 @@ class ListaCiudadesScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 2.0, horizontal: 16.0), // Reducir espacio vertical
                         child: Text(
-                          ciudades[index -1], // -1 para ajustar el índice
+                          ciudades[index - 1], // -1 para ajustar el índice
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16, // Tamaño de texto estándar
@@ -713,19 +729,21 @@ class ListaCiudadesScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Imagen inferior fija
-              Positioned(
-                bottom: -40, // Pegada abajo del todo
-                left: 0,
-                right: 0,
-                child: Image.asset(
-                'assets/images/bottom_notas.jpeg',
-                fit: BoxFit.contain,
-                width: double.infinity,
-                height: 81.8, // Ajustar altura según diseño
-                )
-              ),
+              // Reservamos el espacio para la imagen inferior (para evitar que se superponga al contenido)
+              SizedBox(height: 81.8),
             ],
+          ),
+          // Imagen inferior fija posicionada
+          Positioned(
+            bottom: 0, // Ajusta este valor según necesites
+            left: 0,
+            right: 0,
+            child: Image.asset(
+              'assets/images/bottom_notas.jpeg',
+              fit: BoxFit.contain,
+              width: double.infinity,
+              height: 81.8, // Ajustar altura según diseño
+            ),
           ),
           // Botón de regreso invisible
           Positioned(
